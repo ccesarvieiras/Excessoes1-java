@@ -15,8 +15,11 @@ public class Reserva {
 		super();
 	}
 
-	public Reserva(Integer numeroQuarto, Date checkIn, Date checkOut) {
+	public Reserva(Integer numeroQuarto, Date checkIn, Date checkOut)  {
 		super();
+		if (!checkOut.after(checkIn)) {
+			throw new DomainExceptions("Erro na Reserva, a data de Check-Out nao pode ser maior que a de Check-In");
+		}
 		this.numeroQuarto = numeroQuarto;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -44,19 +47,18 @@ public class Reserva {
 		
 	}
 	
-	public String atualizarDatas(Date checkIn, Date chechOut) {
+	public void atualizarDatas(Date checkIn, Date chechOut) {
 		Date agora = new Date();
 		if (!checkOut.after(checkIn)) {
-			return "Erro na Reserva, a data de Check-Out nao pode ser maior que a de Check-In";
+			throw new DomainExceptions("Erro na Reserva, a data de Check-Out nao pode ser maior que a de Check-In");
 		}
 		
 		if (!checkIn.before(agora) || !checkOut.before(agora)) {
-			return "Erro !! As datas devem ser datas futuras";
+			throw new DomainExceptions ("Erro !! As datas devem ser datas futuras");
 		} 
 
 		this.checkIn = checkIn;
 		this.checkOut = chechOut;
-		return null;
 	}
 
 	
