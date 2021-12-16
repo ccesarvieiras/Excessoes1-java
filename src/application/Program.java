@@ -11,8 +11,8 @@ import model.entities.Reserva;
 
 public class Program {
 
-	//https://github.com/ccesarvieiras/Excessoes1-java
-	
+	// https://github.com/ccesarvieiras/Excessoes1-java
+
 	public static void main(String[] args) {
 
 		try {
@@ -54,7 +54,7 @@ public class Program {
 		catch (DomainExceptions e) {
 			System.out.println("Erro na reserva " + e.getMessage());
 		}
-		
+
 		catch (RuntimeException e) {
 			System.out.println("Erro Inesperado");
 		}
