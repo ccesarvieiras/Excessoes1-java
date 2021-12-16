@@ -44,11 +44,24 @@ public class Reserva {
 		
 	}
 	
-	public void atualizarDatas(Date checkIn, Date chechOut) {
+	public String atualizarDatas(Date checkIn, Date chechOut) {
+		Date agora = new Date();
+		if (!checkOut.after(checkIn)) {
+			return "Erro na Reserva, a data de Check-Out nao pode ser maior que a de Check-In";
+		}
+		
+		if (!checkIn.before(agora) || !checkOut.before(agora)) {
+			return "Erro !! As datas devem ser datas futuras";
+		} 
+
 		this.checkIn = checkIn;
 		this.checkOut = chechOut;
+		return null;
 	}
 
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Reserva: Número do Quarto: " 
@@ -56,7 +69,7 @@ public class Reserva {
 				+ ", checkIn: " 
 				+ sdf.format(checkIn) 
 				+ ", CheckOut=" 
-				+ sdf.format(checkIn)  
+				+ sdf.format(checkOut)  
 				+ ", " 
 				+ duracao() 
 				+ " Noites";
